@@ -5,7 +5,6 @@ import {schemaTypes} from './schemas'
 import {getStartedPlugin} from './plugins/sanity-plugin-tutorial'
 
 const devOnlyPlugins = [getStartedPlugin()]
-
 export default defineConfig({
   name: 'default',
   title: 'orange-flamingo',
@@ -18,5 +17,5 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
-})
+});
 

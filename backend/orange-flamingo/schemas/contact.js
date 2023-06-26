@@ -18,5 +18,6 @@ export default {
             title:'Message',
             type:'text'
         }
-    ]
+    ],
+   
 }

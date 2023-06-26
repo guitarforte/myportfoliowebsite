@@ -40,4 +40,7 @@
     span{
       color: var(--secondary-color);
     }
+    @media (max-width: 800px) {
+      font-size: medium;
+    }
   }

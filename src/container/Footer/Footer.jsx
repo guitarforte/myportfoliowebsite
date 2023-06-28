@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-
+import {  collection, doc,  setDoc   } from "firebase/firestore";
+import { useCallback,  } from "react";
+import { db } from "../firebase/firebase";
 import { images } from '../../constants';
 import  AppWrap from '../../Wrapper/AppWrap';
 import MotionWrap from '../../Wrapper/MotionWrap';
-import { client } from '../../client';
+
 import './Footer.scss';
 
 const Footer = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+ 
 
   const { username, email, message } = formData;
 
@@ -18,23 +21,18 @@ const Footer = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(async (event) => {
+    event.preventDefault();
     setLoading(true);
-
-    const contact = {
-      _type: 'contact',
-      name: formData.username,
-      email: formData.email,
-      message: formData.message,
-    };
-
-    client.create(contact)
-      .then(() => {
-        setLoading(false);
-        setIsFormSubmitted(true);
-      })
-      .catch((err) => console.log(err));
-  };
+    try {
+      
+      await setDoc(doc(collection(db, "About")), formData);
+      setLoading(false);
+      setIsFormSubmitted(true);
+    } catch (error) {
+      alert(`Failed to add data - ${error.message}`);
+    }
+  }, [formData]);
 
   return (
     <>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {  collection, doc,  setDoc   } from "firebase/firestore";
 import { useCallback,  } from "react";
-import { db } from "../firebase/firebase";
+import { db } from "../../firebase/firebase";
 import { images } from '../../constants';
 import  AppWrap from '../../Wrapper/AppWrap';
 import MotionWrap from '../../Wrapper/MotionWrap';
